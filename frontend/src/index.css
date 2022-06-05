@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    @font-face {
+        font-family: "Dana";
+        src: url(./assets/fonts/dana/Dana-FaNum-Regular.ttf) format("ttf");
+    }
+}
+
+* {
+    font-family: "Dana" !imporatnt;
+}
+
+.input {
+    @apply py-5 px-4 bg-gray-200 rounded-lg placeholder-gray-500 text-xl;
+}
+
+.my-btn {
+    @apply py-5 px-4 rounded-lg text-xl text-white;
+}
+
+.active-menu-dashboard-item {
+    @apply bg-red-400 rounded-xl shadow-md text-white px-3;
+}
+
+.activeTab {
+    @apply px-5 py-3 bg-red-400 text-white rounded-xl text-base shadow-lg font-semibold;
+}
+.activeTab * {
+    @apply text-white;
+}
+.tabBase {
+    @apply px-5 py-3 text-gray-600 text-base inline-block;
+}
+
+.radioActive {
+    @apply w-2 h-2 bg-yellow-300 rounded-full inline-block ml-1;
+}
+.radioActive {
+    @apply w-2 h-2 bg-yellow-300 rounded-full inline-block ml-1;
+}
+
+.mainHeader {
+    @apply text-xl font-medium;
+}
+
+
+
+
+.MySwitch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.MySwitch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.MySwichSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.MySwichSlider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  right: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .MySwichSlider {
+  background-color: #F87171;
+}
+
+input:focus + .MySwichSlider {
+  box-shadow: 0 0 1px #F87171;
+}
+
+input:checked + .MySwichSlider:before {
+  -webkit-transform: translateX(-26px);
+  -ms-transform: translateX(-26px);
+  transform: translateX(-26px);
+}
+
+/* Rounded MySwichSliders */
+.MySwichSlider.round {
+  border-radius: 34px;
+}
+
+.MySwichSlider.round:before {
+  border-radius: 50%;
+}
+
+
+
+.swiper-button-next{
+    left:0px !important;
+    padding: 30px;
+    height : 110% !important;
+    top : 0 !important;
+    bottom :0 !important;
+    color: #fff !important;
+    fill: #fff !important;
+    stroke: black !important;
+}
+.swiper-button-prev {
+    right:0px !important;
+    padding: 30px;
+    height : 110% !important;
+    top : 0 !important;
+    bottom :0 !important;
+    color: #fff !important;
+    fill: #fff !important;
+    stroke: black !important;
+}
+
+
+
+.verticallySlider .swiper .swiper-pagination .swiper-pagination-bullet{
+  @apply bg-red-400 scale-150 my-3;
+}
+.verticallySlider .swiper-slide-active{
+  @apply opacity-100  !important;
+}
+
+.verticallySlider .swiper-slide {
+  @apply md:opacity-30 shadow-none opacity-100;
+}
+
+.verticallySlider .swiper-pagination {
+  right : 5px !important;
+}
+
+
+.fav-city-box ::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.fav-city-box ::-webkit-scrollbar-track {
+  border-radius: 5px;
+}
+ 
+/* Handle */
+.fav-city-box ::-webkit-scrollbar-thumb {
+  background: #e5e5e5; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.fav-city-box ::-webkit-scrollbar-thumb:hover {
+  background: #ccc; 
+}

@@ -1,0 +1,16 @@
+{
+    "name": "service/kavenegar",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Services\\Kavenegar\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Services\\Kavenegar\\KavenegarServiceProvider"
+            ]
+        }
+    }
+}

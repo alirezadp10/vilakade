@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9873bcd4.css",
+    "main.js": "/static/js/main.9b78409a.js",
+    "static/media/lissete-laverde-7OFTxbGWqwk-unsplash.jpg": "/static/media/lissete-laverde-7OFTxbGWqwk-unsplash.139540f5f4b479252fa4.jpg",
+    "static/media/li-yang-FKsKhlTrx78-unsplash.jpg": "/static/media/li-yang-FKsKhlTrx78-unsplash.f0415cf1658e1b047f21.jpg",
+    "static/media/outsite-co-R-LK3sqLiBw-unsplash.jpg": "/static/media/outsite-co-R-LK3sqLiBw-unsplash.2c69bee4166dbc04f148.jpg",
+    "static/media/1-280.jpg": "/static/media/1-280.37de686525b4a8a2179d.jpg",
+    "static/media/29575-tavalod-org.jpg": "/static/media/29575-tavalod-org.ab143c7fe5970a06e71b.jpg",
+    "static/media/Dana-FaNum-Regular.ttf": "/static/media/Dana-FaNum-Regular.dad2b4ad36124ee30c05.ttf",
+    "static/media/2327.jpg": "/static/media/2327.0b4314f06605d34aa351.jpg",
+    "index.html": "/index.html",
+    "main.9873bcd4.css.map": "/static/css/main.9873bcd4.css.map",
+    "main.9b78409a.js.map": "/static/js/main.9b78409a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9873bcd4.css",
+    "static/js/main.9b78409a.js"
+  ]
+}
