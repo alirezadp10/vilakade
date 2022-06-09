@@ -2,6 +2,7 @@
 
 namespace App\Filters;
 
+use App\Models\Reservation;
 use Morilog\Jalali\Jalalian;
 
 class VillaFilter extends Filters
@@ -66,11 +67,13 @@ class VillaFilter extends Filters
         return $this->builder->whereDoesntHave('reserves', function ($q) use ($times) {
             [$from, $until] = explode(',', $times);
 
-            $from = (new Jalalian(...explode('-', $from)))->toCarbon()->toDateTimeString();
+            $from = Jalalian::fromFormat('Y-m-d', $from)->toCarbon()->toDateString();
 
-            $until = (new Jalalian(...explode('-', $until)))->toCarbon()->toDateTimeString();
+            $until = Jalalian::fromFormat('Y-m-d', $until)->toCarbon()->toDateString();
 
-            return $q->whereBetween('from_date', [$from, $until])->orWhereBetween('until_date', [$from, $until]);
+            return $q->where('status', Reservation::STATES['reserved'])
+                ->whereBetween('from_date', [$from, $until])
+                ->orWhereBetween('until_date', [$from, $until]);
         });
     }
 

@@ -16,8 +16,8 @@ class Reservation extends Model
     ];
 
     protected $casts = [
-        'from_date'  => 'datetime',
-        'until_date' => 'datetime',
+        'from_date'  => 'date:Y-m-d',
+        'until_date' => 'date:Y-m-d',
     ];
 
     public static $rules = [

@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "8.0",
+        "php": "8.0.*",
         "alirezadp10/seeder": "^1.0",
         "amidesfahani/nova-persian-date": "^1.0",
         "anhskohbo/no-captcha": "^3.3",
@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.5",
         "laravelwebdev/responsive": "^1.0",
         "morilog/jalali": "^3.2",
-        "predis/predis": "^1.1",
+        "predis/predis": "^2.0",
         "service/kavenegar": "^1.0",
         "sloveniangooner/searchable-select": "^1.3"
     },

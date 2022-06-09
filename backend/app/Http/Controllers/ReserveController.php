@@ -41,9 +41,19 @@ class ReserveController extends Controller
 
     public function store(Request $request, Villa $villa)
     {
+        $fromDate = Jalalian::fromFormat('Y-m-d', $request->from_date)->toCarbon()->toDateString();
+        $untilDate = Jalalian::fromFormat('Y-m-d', $request->until_date)->toCarbon()->toDateString();
+
+        $exist = Reservation::whereStatus(Reservation::STATES['reserved'])
+            ->whereBetween('from_date', [$fromDate, $untilDate])
+            ->orWhereBetween('until_date', [$fromDate, $untilDate])
+            ->exists();
+
+        abort_if($exist, 422, 'این مکان قبلا رزرو شده است.');
+
         $reservation = Reservation::forceCreate([
-            'from_date'  => (new Jalalian(...explode('-', $request->from_date)))->toCarbon()->toDateTimeString(),
-            'until_date' => (new Jalalian(...explode('-', $request->until_date)))->toCarbon()->toDateTimeString(),
+            'from_date'  => $fromDate,
+            'until_date' => $untilDate,
             'status'     => Reservation::STATES['pending'],
             'villa_id'   => $villa->id,
             'user_id'    => auth()->id(),

@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Models\Reservation;
 use App\Models\Villa;
 use Database\Seeders\CitySeeder;
 use Database\Seeders\ProvinceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\Jalalian;
 use Tests\TestCase;
 
@@ -144,12 +146,12 @@ class VillaTest extends TestCase
         Villa::factory(1)->create();
 
         Villa::factory()->hasReserves([
-            'from_date'  => (new Jalalian('1401', '01', '11'))->toCarbon()->toString(),
-            'until_date' => (new Jalalian('1401', '01', '14'))->toCarbon()->toString(),
+            'from_date'  => (new Jalalian('1401', '01', '11'))->toCarbon()->toDateString(),
+            'until_date' => (new Jalalian('1401', '01', '14'))->toCarbon()->toDateString(),
             'status'     => 'RESERVED',
         ])->hasReserves([
-            'from_date'  => (new Jalalian('1401', '01', '17'))->toCarbon()->toString(),
-            'until_date' => (new Jalalian('1401', '01', '22'))->toCarbon()->toString(),
+            'from_date'  => (new Jalalian('1401', '01', '17'))->toCarbon()->toDateString(),
+            'until_date' => (new Jalalian('1401', '01', '22'))->toCarbon()->toDateString(),
             'status'     => 'RESERVED',
         ])->create();
 

@@ -26,9 +26,6 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./backend:/var/www/backend
-            - ./backend/docker/supervisord.conf:/etc/supervisor/conf.d/app.conf
-            - ./backend/docker/php.ini:/usr/local/etc/php/conf.d/app.ini
-            - ./backend/docker/start-container:/usr/local/bin/start-container
         networks:
             - vilakade
         working_dir: /var/www/backend

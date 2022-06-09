@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\User;
 use App\Models\Villa;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\Jalalian;
 use Tests\TestCase;
 
@@ -155,8 +156,39 @@ class ReservationTest extends TestCase
         $this->assertNotEmpty($villa->reserves);
 
         $this->assertDatabaseHas('reservations', [
-            'from_date'  => (new Jalalian('1401', '01', '11'))->toCarbon()->toDateTimeString(),
-            'until_date' => (new Jalalian('1401', '01', '17'))->toCarbon()->toDateTimeString(),
+            'from_date'  => (new Jalalian('1401', '01', '11'))->toCarbon()->toDateString(),
+            'until_date' => (new Jalalian('1401', '01', '17'))->toCarbon()->toDateString(),
+            'status'     => 'PENDING',
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    function users_can_not_reserve_villa_which_already_reserved()
+    {
+        $villa = Villa::factory()->create();
+
+        $mohammadiNam = User::factory()->create();
+
+        DB::table('reservations')->insert([
+            'from_date'  => '2022-04-09',
+            'until_date' => '2022-04-14',
+            'status'     => 'RESERVED',
+            'user_id'    => $mohammadiNam->id,
+            'villa_id'   => $villa->id,
+        ]);
+
+        $abbasbouazar = User::factory()->create();
+
+        $this->actingAs($abbasbouazar)->postJson('/api/reserves/1', [
+            'from_date'  => '1401-01-18',
+            'until_date' => '1401-01-21',
+        ])->assertStatus(422);
+
+        $this->assertDatabaseMissing('reservations', [
+            'from_date'  => (new Jalalian('1401', '01', '18'))->toCarbon()->toDateString(),
+            'until_date' => (new Jalalian('1401', '01', '21'))->toCarbon()->toDateString(),
             'status'     => 'PENDING',
         ]);
     }

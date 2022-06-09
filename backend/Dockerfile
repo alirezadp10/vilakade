@@ -37,11 +37,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/backend
 
-RUN useradd -g 0 -u 1000 user
-
-COPY ./docker/start-container /usr/local/bin/start-container
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker/php.ini /usr/local/etc/php/conf.d/app.ini
+COPY ./docker/start-container /usr/local/bin/start-container
+
 RUN chmod +x /usr/local/bin/start-container
 
 ENTRYPOINT ["start-container"]
