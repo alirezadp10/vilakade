@@ -3,6 +3,21 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import HistoryCard from "./HistoryCard";
+import HistoryMainCardVertically from "./HistoryMainCardVertically";
+
+
+// import image
+import {
+    birthday,
+    marry,
+    luxery,
+    relax,
+    flat,
+    mostaghel,
+    modern,
+    dublex,
+    Towni,
+} from "../../../assets/imgs/Images";
 
 const UserHistoryContainer = styled.div``;
 
@@ -26,7 +41,7 @@ function UserHistoryPanelComponent() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
         },
         {
@@ -42,7 +57,7 @@ function UserHistoryPanelComponent() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
         },
         {
@@ -58,7 +73,7 @@ function UserHistoryPanelComponent() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
         },
         {
@@ -74,7 +89,7 @@ function UserHistoryPanelComponent() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 2,
         },
     ]);
@@ -170,16 +185,12 @@ function UserHistoryPanelComponent() {
                     <span className="text-gray-400">(  {VillaInfo.filter(item=>item.reserveStatus ==1).length} )</span>
                 </div>
             </div>
-            <div>
+            <div className="space-y-5">
                 {
-                    // ResultFilterArray.map(item=>{
-                    //     console.log('item');
-                    //     console.log(item);
-                    //     <HistoryCard VillaInfomation={item} />;
-                    // })
                     activeTab === 'one' ? (
                         VillaInfo.map(item=>(
-                            <HistoryCard VillaInfomation={item} />
+                            // <HistoryCard VillaInfomation={item} />
+                            <HistoryMainCardVertically villaInfo={item} />
                         ))
                     ) : null
                 }

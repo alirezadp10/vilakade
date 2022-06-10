@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SliderFull from "../../SecondaryComponent/SliderFull";
 import Category from "./Category";
@@ -8,6 +8,19 @@ import MainTitle from "./../../GlobalComponenet/Titles/MainTitle";
 import { defaultMarginTop } from "./../../variables";
 import SpecialMainCard from "./SpecialMainCard";
 import VerticalSlider from "./Components/VerticalSlider";
+
+// import image
+import {
+    birthday,
+    marry,
+    luxery,
+    relax,
+    flat,
+    mostaghel,
+    modern,
+    dublex,
+    Towni,
+} from "../../../assets/imgs/Images";
 
 const HomeContainer = styled.div``;
 
@@ -20,12 +33,10 @@ const MainSection = styled.section`
 `;
 
 function Home() {
-
-
     const [villaInformations, setVillaInformations] = useState([
         {
             id: 125,
-            name: "سوییت نقلی «دینا» در رشت",
+            name: "اجاره ویلا شماره یک",
             country: "iran",
             State: "مازندران",
             city: "نوشهر",
@@ -36,13 +47,13 @@ function Home() {
             price: "1000000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 126,
-            name: "سوییت نقلی «دینا» در رشت",
+            name: "اجاره ویلا شماره دو",
             country: "iran",
             State: "مازندران",
             city: "نوشهر",
@@ -53,16 +64,16 @@ function Home() {
             price: "2200000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 127,
-            name: "سوییت نقلی «دینا» در رشت",
+            name: "اجاره ویلا شماره سه",
             country: "iran",
             State: "مازندران",
-            city: "نوشهر",
+            city: "رامسر",
             datecreate: "1398/02/20",
             dateReserved: {},
             reserveStartDate: "1400/12/28",
@@ -70,16 +81,16 @@ function Home() {
             price: "800000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 128,
-            name: "سوییت نقلی «دینا» در رشت",
+            name: "اجاره ویلا شماره 4",
             country: "iran",
-            State: "گیلان",
-            city: "نوشهر",
+            State: "مازندران",
+            city: "چالوس",
             datecreate: "1398/02/20",
             dateReserved: {},
             reserveStartDate: "1400/12/28",
@@ -87,16 +98,16 @@ function Home() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 2,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 129,
-            name: "سوییت در رشت",
+            name: "اجاره ویلا شماره 5",
             country: "iran",
-            State: "گیلان",
-            city: "نوشهر",
+            State: "مازندران",
+            city: "بابلسر",
             datecreate: "1398/02/20",
             dateReserved: {},
             reserveStartDate: "1400/12/28",
@@ -104,16 +115,16 @@ function Home() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 2,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 130,
-            name: "سوییت نقلی «دینا» در رشت",
+            name: "اجاره ویلا شماره 6",
             country: "iran",
-            State: "گیلان",
-            city: "نوشهر",
+            State: "گرگان",
+            city: "ماسال",
             datecreate: "1398/02/20",
             dateReserved: {},
             reserveStartDate: "1400/12/28",
@@ -121,16 +132,16 @@ function Home() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 2,
-            discount : 20,
+            discount: 20,
         },
         {
             id: 131,
-            name: "سوییت در رشت",
+            name: "اجاره ویلا شماره 7",
             country: "iran",
             State: "گیلان",
-            city: "نوشهر",
+            city: "گرگان",
             datecreate: "1398/02/20",
             dateReserved: {},
             reserveStartDate: "1400/12/28",
@@ -138,14 +149,17 @@ function Home() {
             price: "1300000",
             url: "125685",
             mainImg: "kdjklsmc",
-            imgs: {},
+            imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 2,
-            discount : 20,
+            discount: 20,
         },
-    ])
+    ]);
 
-    const [ActiveVillaMain, setActiveVillaMain] = useState(villaInformations[0]);
-
+    const [ActiveVillaMain, setActiveVillaMain] = useState(
+        villaInformations[0]
+    );
+    console.log('ActiveVillaMain')
+    console.log(ActiveVillaMain)
 
     return (
         <HomeContainer className="mx-auto">
@@ -169,22 +183,26 @@ function Home() {
                     <MainTitle title="اقامتگاه های ویژه" />
                     <div className="md:grid md:grid-cols-12 md:gap-8 flex flex-col gap-4">
                         <div className="col-span-6">
-                            <VerticalSlider villaInformations={villaInformations} setActiveVillaMain={setActiveVillaMain} />
+                            <VerticalSlider
+                                villaInformations={villaInformations}
+                                setActiveVillaMain={setActiveVillaMain}
+                            />
                         </div>
                         <div className="col-span-6">
-                            <SpecialMainCard ActiveVillaMain={ActiveVillaMain} />
+                            <SpecialMainCard
+                                ActiveVillaMain={ActiveVillaMain}
+                            />
                         </div>
                     </div>
                 </div>
             </MainSection>
 
             <MainSection className="w-full" props={defaultMarginTop} dir="ltr">
-                <div>
+                <div className="mr-10 mt-20">
+                <MainTitle title="ویللا های پرطرفدار" />
                     <SliderFull villaInformations={villaInformations} />
                 </div>
             </MainSection>
-
-            
         </HomeContainer>
     );
 }

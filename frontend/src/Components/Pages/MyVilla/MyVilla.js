@@ -52,6 +52,20 @@ import gregorian from "react-date-object/calendars/gregorian";
 import gregorian_fa from "react-date-object/locales/gregorian_fa";
 import { useUserState } from "../../../Providers/UserProvider";
 
+// import image
+import {
+    birthday,
+    marry,
+    luxery,
+    relax,
+    flat,
+    mostaghel,
+    modern,
+    dublex,
+    Towni,
+} from "../../../assets/imgs/Images";
+import { LocatopnIcon, ShareIcon } from "../../../Theme/AllSvg";
+
 const MainSection = styled.div``;
 
 function MyVilla() {
@@ -72,7 +86,17 @@ function MyVilla() {
         price: "1000000",
         url: "125685",
         mainImg: "kdjklsmc",
-        imgs: {},
+        imgs: [
+            birthday,
+            marry,
+            luxery,
+            relax,
+            flat,
+            mostaghel,
+            modern,
+            dublex,
+            Towni,
+        ],
         reserveStatus: 1,
         discount: 20,
         maxGuist: 5,
@@ -177,14 +201,39 @@ function MyVilla() {
         alert("order is submit" + useerInfo.fullname);
     };
 
+    // copy to clip board url
+    const CopyLinkTClipBoard= () =>{
+        navigator.clipboard.writeText(window.location.href)
+    }
+
     return (
         <MainSection className="container mx-auto">
             <div className="w-10/12 mx-auto">
                 <div className="main-content mt-8">
                     <div className="grid md:grid-cols-6 grid-cols-1 md:gap-5 gap-y-5">
                         <div className="col-span-4">
+                            <div className="border-2 border-gray-100 px-8 py-4 rounded-2xl mb-3">
+                                <div className="w-full flex justify-between items-start ">
+                                    <div>
+                                        <h2 className="text-2xl font-bold">
+                                            {mystay.name}
+                                        </h2>
+                                        <span className="flex gap-1 items-center mt-2 text-gray-400">
+                                            <LocatopnIcon />
+                                            <span className="text-red-400 text-base"> {mystay.State} - {mystay.city}  </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span className="hover:text-red-400 pt-2" onClick={CopyLinkTClipBoard}>
+                                            <ShareIcon />
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                             <div>
-                                <SliderVillaContainer />
+                                <SliderVillaContainer
+                                    mystayImage={mystay.imgs}
+                                />
                             </div>
 
                             <div className="Feature-list flex flex-col md:gap-5 gap-y-3 mt-4">
@@ -646,7 +695,7 @@ function MyVilla() {
                                                     />
                                                 }
                                                 onChange={startConvert}
-                                                numberOfMonths={2}
+                                                numberOfMonths={1}
                                                 disableMonthPicker
                                                 disableYearPicker
                                                 calendar={persian}

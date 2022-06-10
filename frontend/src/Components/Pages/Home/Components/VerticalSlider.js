@@ -34,12 +34,6 @@ function VerticalSlider(props) {
 
     // refrence
     const verticalRef = useRef();
-    // const villaActive = {};
-    // useEffect(() => {
-    //     const aa = verticalRef.current;
-    //   return () => {
-    //   }
-    // })
 
     const [realSwiperIndex, setRealSwiperIndex] = useState(0);
 

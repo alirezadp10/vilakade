@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FiEdit, FiMoreVertical, FiTrash2 } from "react-icons/fi";
 import { image2 } from "../../variables";
 import NumberFormat from "react-number-format";
@@ -9,22 +9,43 @@ import { useNavigate } from "react-router-dom";
 const HistoryCardContainer = styled.div``;
 
 function HistoryCard(props) {
-    console.log('first')
-    const { VillaInfomation , activeTab } = props;
-    console.log('VillaInfomation');
+    console.log("first");
+    const { VillaInfomation, activeTab } = props;
+    console.log("VillaInfomation");
     console.log(VillaInfomation);
 
     // more box show or not
     const [openMoreBox, setOpenMoreBox] = useState(false);
 
     // naviaftor react router dome
-    let navigate   = useNavigate();
+    let navigate = useNavigate();
 
-    //  handle see villa 
-    const handleSeeVilla  = (villaId) =>{
+    //  handle see villa
+    const handleSeeVilla = (villaId) => {
         alert(villaId);
         navigate(`/stay/${villaId}`);
-    }
+    };
+
+    //
+    // use ref in main search in hero
+    const refMoreBox = useRef();
+
+    useEffect(() => {
+        const checkIfClickOutside = (event) => {
+            if (
+                openMoreBox &&
+                refMoreBox.current &&
+                !refMoreBox.current.contains(event.target)
+            ) {
+                setOpenMoreBox(false);
+            }
+        };
+
+        document.addEventListener("click", checkIfClickOutside);
+        return () => {
+            document.addEventListener("click", checkIfClickOutside);
+        };
+    }, [openMoreBox]);
 
     return (
         <HistoryCardContainer>
@@ -42,7 +63,8 @@ function HistoryCard(props) {
                                 زمان رزرو :
                             </span>
                             <span className="py-3 px-3 inline-block">
-                                {VillaInfomation.reserveStartDate} - {VillaInfomation.reserveEndDate}
+                                {VillaInfomation.reserveStartDate} -{" "}
+                                {VillaInfomation.reserveEndDate}
                             </span>
                         </div>
                         <div className="flex justify-start md:flex-row flex-col items-start">
@@ -62,7 +84,7 @@ function HistoryCard(props) {
                             </di>
                         </div>
                         <div className="flex flex-col justify-between items-end">
-                            <div className="relative">
+                            <div className="relative" ref={refMoreBox}>
                                 <FiMoreVertical
                                     onClick={() => setOpenMoreBox(true)}
                                     size={25}
@@ -96,9 +118,10 @@ function HistoryCard(props) {
                         </div>
                     </div>
 
-                    <div className="bg-red-400 md:w-1/12 w-full h-16 md:h-auto md:block flex justify-center relative cursor-pointer"
-                    
-                    onClick={()=>handleSeeVilla(VillaInfomation.id) }>
+                    <div
+                        className="bg-red-400 md:w-1/12 w-full h-16 md:h-auto md:block flex justify-center relative cursor-pointer"
+                        onClick={() => handleSeeVilla(VillaInfomation.id)}
+                    >
                         <div className="md:rotate-90 text-white h-full w-32  flex md:right-6 relative md:items-start items-center justify-center">
                             مشاهده ویلا
                         </div>

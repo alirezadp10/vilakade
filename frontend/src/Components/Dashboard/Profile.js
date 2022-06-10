@@ -113,6 +113,9 @@ function Profile() {
         panelShow();
     }, [MyLocation]);
 
+
+    
+
     return (
         <MainSection className="container mx-auto">
             <div className="w-10/12 mx-auto">

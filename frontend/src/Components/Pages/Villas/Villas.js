@@ -7,6 +7,21 @@ import styled from "styled-components";
 import BoxShadow from "./../../GlobalComponenet/BoxShadow";
 import VillaCardSmall from "./componenet/VillaCardSmall";
 
+import {
+    birthday,
+    marry,
+    luxery,
+    relax,
+    flat,
+    mostaghel,
+    modern,
+    dublex,
+    Towni,
+} from "../../../assets/imgs/Images";
+
+//
+import { ComputePrice } from "../../../GeneralFunction/Functions";
+
 const VillasContainer = styled.div``;
 
 const MainSection = styled.section`
@@ -14,19 +29,101 @@ const MainSection = styled.section`
     padding-bottom: 50px;
 `;
 function Villas(props) {
-    const [ActiveSortingItem, setActiveSortingItem] = useState("مرتبط‌ ترین");
+    const [ActiveSortingItem, setActiveSortingItem] = useState("related");
 
     const handleClickSort = (event) => {
-        setActiveSortingItem(event.target.textContent);
+        const nameSort = event.target.getAttribute("name");
+        setActiveSortingItem(nameSort);
+        switch (nameSort) {
+            case "related":
+                console.log("related");
+                // VillasList.sort((a,b)=>a.)
+                const relatedSort = VillasList.sort(function (a, b) {
+                    // var nameA = a.seen.toLowerCase(), nameB = b.seen.toLowerCase();
+                    var nameA = a.id,
+                        nameB = b.id;
+                    if (nameA < nameB)
+                        //sort string ascending
+                        return -1;
+                    if (nameA > nameB) return 1;
+                    return 0; //default return value (no sorting)
+                });
+                setVillasList(relatedSort);
+                break;
+            case "visited":
+                console.log("visited");
+                const vistedSort = VillasList.sort(function (a, b) {
+                    // var nameA = a.seen.toLowerCase(), nameB = b.seen.toLowerCase();
+                    var nameA = a.seen,
+                        nameB = b.seen;
+                    if (nameA < nameB)
+                        //sort string ascending
+                        return 1;
+                    if (nameA > nameB) return -1;
+                    return 0; //default return value (no sorting)
+                });
+                setVillasList(vistedSort);
+                break;
+            case "popular":
+                console.log("popular");
+                const popularSort = VillasList.sort(function (a, b) {
+                    // var nameA = a.seen.toLowerCase(), nameB = b.seen.toLowerCase();
+                    var nameA = a.seen,
+                        nameB = b.seen;
+                    if (nameA < nameB)
+                        //sort string ascending
+                        return 1;
+                    if (nameA > nameB) return -1;
+                    return 0; //default return value (no sorting)
+                });
+                setVillasList(popularSort);
+                break;
+            case "cheapest":
+                console.log("cheapest");
+                const CheapSort = VillasList.sort(function (a, b) {
+                    // var nameA = a.seen.toLowerCase(), nameB = b.seen.toLowerCase();
+                    var nameA = ComputePrice(a.price, a.discount),
+                        nameB = ComputePrice(b.price, b.discount);
+                    if (nameA < nameB)
+                        //sort string ascending
+                        return 1;
+                    if (nameA > nameB) return -1;
+                    return 0; //default return value (no sorting)
+                });
+                setVillasList(CheapSort);
+                break;
+            case "expensive":
+                console.log("expensive");
+                const ExpensiveSort = VillasList.sort(function (a, b) {
+                    // var nameA = a.seen.toLowerCase(), nameB = b.seen.toLowerCase();
+                    var nameA = a.price,
+                        nameB = b.price;
+                    if (nameA < nameB)
+                        //sort string ascending
+                        return -1;
+                    if (nameA > nameB) return 1;
+                    return 0; //default return value (no sorting)
+                });
+                setVillasList(ExpensiveSort);
+                break;
+            case "suggestions":
+                console.log("suggestions");
+                break;
+
+            default:
+                console.log("others");
+                break;
+        }
+        // VillasList.sort((a,b) => a. )
     };
 
     const [typeVillafilter, setTypeVillafilter] = useState({
-        villai: true,
-        apartment: false,
+        villai: false,
+        apartment: true,
         colbeh: false,
-        jangali: true,
-        Mahali: true,
-        souit: true,
+        jangali: false,
+        Mahali: false,
+        souit: false,
     });
 
     const [rateVillafilter, setRateVillafilter] = useState(4.5);
@@ -56,19 +153,230 @@ function Villas(props) {
         }));
     };
 
+    useEffect(() => {
+        console.log(typeVillafilter);
+        
+        console.log("refresh");
+    }, [typeVillafilter]);
+
     // get params url
     const [ParamsCity, setParamsCity] = useState("");
     const { city } = useParams();
     useEffect(() => {
         if (city) {
             setParamsCity(city);
-        } else{
-            setParamsCity('همه موارد');
+        } else {
+            setParamsCity("همه موارد");
         }
         return () => {
             setParamsCity(null);
         };
     }, [ParamsCity]);
+
+    const [VillasList, setVillasList] = useState([
+        {
+            id: 125,
+            name: "اجاره ویلا شماره یک",
+            country: "iran",
+            State: "مازندران",
+            city: "نوشهر",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/15",
+            price: "1000000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 1,
+            discount: 20,
+            seen: 10,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Apartment", "local"],
+        },
+        {
+            id: 126,
+            name: "اجاره ویلا شماره دو",
+            country: "iran",
+            State: "مازندران",
+            city: "نوشهر",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/15",
+            price: "2200000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 1,
+            discount: 8,
+            seen: 15,
+            rate: 4.5,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["", "local"],
+        },
+        {
+            id: 127,
+            name: "اجاره ویلا شماره سه",
+            country: "iran",
+            State: "مازندران",
+            city: "رامسر",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/15",
+            price: "800000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 1,
+            discount: 10,
+            seen: 5,
+            rate: 2,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Apartment", "local"],
+        },
+        {
+            id: 128,
+            name: "اجاره ویلا شماره 4",
+            country: "iran",
+            State: "مازندران",
+            city: "چالوس",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/8",
+            price: "13000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 2,
+            discount: 15,
+            seen: 100,
+            rate: 3.2,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Suite"],
+        },
+        {
+            id: 129,
+            name: "اجاره ویلا شماره 5",
+            country: "iran",
+            State: "مازندران",
+            city: "بابلسر",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/8",
+            price: "8900000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 2,
+            discount: 80,
+            seen: 480,
+            rate: 4,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Cottage"],
+        },
+        {
+            id: 130,
+            name: "اجاره ویلا شماره 6",
+            country: "iran",
+            State: "گرگان",
+            city: "ماسال",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/8",
+            price: "1000000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 2,
+            discount: 45,
+            seen: 30,
+            rate: 3.6,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Cottage", "Villa"],
+        },
+        {
+            id: 131,
+            name: "اجاره ویلا شماره 7",
+            country: "iran",
+            State: "گیلان",
+            city: "گرگان",
+            datecreate: "1398/02/20",
+            dateReserved: {},
+            reserveStartDate: "1400/12/28",
+            reserveEndDate: "1401/01/8",
+            price: "3300000",
+            url: "125685",
+            mainImg: "kdjklsmc",
+            imgs: [birthday, marry, luxery, relax, flat],
+            reserveStatus: 2,
+            discount: 35,
+            seen: 111,
+            rate: 2.8,
+            properties: {
+                rooms: 2,
+                Area: 125,
+                Area: 1256,
+                Furniture: true,
+                heatingSystem: true,
+                CoolingSystem: true,
+                Parking: true,
+            },
+            type: ["Villa"],
+        },
+    ]);
 
     return (
         <MainSection className="container mx-auto">
@@ -77,7 +385,10 @@ function Villas(props) {
                     <BoxShadow>
                         <div className="flex justify-between md:flex-row flex-col md:space-y-0 space-y-3 my-2">
                             <div>
-                                <Link to="/" className="hover:text-red-400"> ویلا کده </Link>
+                                <Link to="/" className="hover:text-red-400">
+                                    {" "}
+                                    ویلا کده{" "}
+                                </Link>
                                 <span> / </span>
                                 <span className="text-xl font-medium text-gray-400 ">
                                     اجاره ویلا در {ParamsCity}
@@ -85,7 +396,7 @@ function Villas(props) {
                             </div>
                             <div className="text-lg ">
                                 <span className="text-black font-semibold mx-2">
-                                    1,300
+                                    {VillasList.length}
                                 </span>
                                 <span className="text-gray-500">
                                     اقامتگاه برای شما
@@ -250,61 +561,66 @@ function Villas(props) {
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem === "مرتبط‌ ترین"
+                                            ActiveSortingItem === "related"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer `}
+                                        name="related"
                                     >
                                         مرتبط‌ ترین
                                     </span>
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem == "پربازدید ترین"
+                                            ActiveSortingItem == "visited"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer`}
+                                        name="visited"
                                     >
                                         پربازدید ترین
                                     </span>
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem == "محبوبترین"
+                                            ActiveSortingItem == "popular"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer`}
+                                        name="popular"
                                     >
                                         محبوبترین
                                     </span>
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem === "ارزان‌ترین"
+                                            ActiveSortingItem === "cheapest"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer`}
+                                        name="cheapest"
                                     >
                                         ارزان‌ترین
                                     </span>
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem === "گران ترین"
+                                            ActiveSortingItem === "expensive"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer`}
+                                        name="expensive"
                                     >
                                         گران ترین
                                     </span>
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
-                                            ActiveSortingItem ===
-                                            "پیشنهادات خریداران"
+                                            ActiveSortingItem === "suggestions"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
                                         } cursor-pointer`}
+                                        name="suggestions"
                                     >
                                         پیشنهادات خریداران
                                     </span>
@@ -314,9 +630,9 @@ function Villas(props) {
 
                         <div>
                             <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
-                                {[...Array(18)].map((item, index) => (
+                                {VillasList.map((item, index) => (
                                     <div className="col">
-                                        <VillaCardSmall />
+                                        <VillaCardSmall villa={item} />
                                     </div>
                                 ))}
                             </div>

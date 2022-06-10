@@ -15,14 +15,13 @@ function VerticalCard(props) {
         <div className="flex justify-start gap-x-3 relative ">
             <img
                 className="rounded-lg"
-                src={image2}
+                src={item.imgs[0]}
                 alt="kndc"
-                style={{ maxWidth: 150 }}
+                style={{ maxWidth: 120 , maxHeight:100 }}
             />
             <div className="">
                 <h4 className="text-lg"> {item.name} </h4>
                 <div className="text-red-400">
-                    {" "}
                     {item.State} - {item.city}{" "}
                 </div>
                 <div className="absolute bottom-0 left-0 flex flex-col items-end gap-y-1">

@@ -23,6 +23,7 @@ import Footer from "./Components/GlobalComponenet/Footer";
 //  import context
 import UserProvider from "./Providers/UserProvider";
 import StaysProvider from "./Providers/StaysProvider";
+import Invoices from "./Components/Pages/Payment/Invoices";
 
 const MainSection = styled.section`
     margin-top: ${(props) => props.props};
@@ -79,6 +80,7 @@ function App() {
                             <Route path="/stays/:city" element={<Villas />} />
                             <Route path="/stays/" element={<Villas />} />
                             <Route path="/stay/:slug" element={<MyVilla />} />
+                            <Route path="/invoice" element={<Invoices />} />
                         </Routes>
                     </AnimatePresence>
 
