@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Filters\VillaFilter;
+use App\Traits\VillaAddressTrait;
+use App\Traits\VillaCategoriesTrait;
+use App\Traits\VillaOptionsTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
@@ -11,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Villa extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory, InteractsWithMedia, VillaOptionsTrait, VillaAddressTrait, VillaCategoriesTrait;
 
     protected $fillable = [
         'title',
@@ -33,7 +36,7 @@ class Villa extends Model implements HasMedia
         'area'             => ['required', 'integer', 'gte:10'],
         'foundation'       => ['required', 'integer', 'gte:10'],
         'type'             => ['required', 'in:apartment,bungalow,hut,studio_flat,garden'],
-        'rate'             => ['nullable', 'integer'],
+        'rate'             => ['nullable', 'integer', 'gte:0', 'lte:5'],
         'instant_delivery' => ['nullable', 'boolean'],
         'price'            => ['required', 'integer', 'gte:1000'],
         'discount'         => ['required', 'integer', 'gte:0', 'lte:100'],
@@ -72,29 +75,9 @@ class Villa extends Model implements HasMedia
         return $this->getMedia('images')->all();
     }
 
-    public function getCityAttribute()
-    {
-        return $this->address()->first()?->city?->name;
-    }
-
-    public function getProvinceAttribute()
-    {
-        return $this->address()->first()?->city?->province?->name;
-    }
-
-    public function address()
-    {
-        return $this->morphOne(Address::class, 'addressable');
-    }
-
     public function reserves()
     {
         return $this->hasMany(Reservation::class);
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'villas_categories');
     }
 
     public function owner()

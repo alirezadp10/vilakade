@@ -6,8 +6,11 @@ use App\Nova\Filters\CreatedFromAtFilter;
 use App\Nova\Filters\CreatedUntilAtFilter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
+use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 abstract class Resource extends NovaResource
 {
@@ -36,10 +39,44 @@ abstract class Resource extends NovaResource
         return parent::relatableQuery($request, $query);
     }
 
+    public function fields(Request $request)
+    {
+        $fields = [];
+
+        $fields[] = ID::make()->sortable();
+
+        $fields = array_merge($fields, $this->extraFields($request));
+
+        $fields[] = DateTime::make('updated at')
+            ->hideWhenCreating()
+            ->hideWhenUpdating()
+            ->default(now())
+            ->sortable()
+            ->displayUsing(function ($value) {
+                return jdate($value)->toString();
+            });
+
+        $fields[] = DateTime::make('created at')
+            ->hideWhenCreating()
+            ->hideWhenUpdating()
+            ->default(now())
+            ->hideFromIndex()
+            ->displayUsing(function ($value) {
+                return jdate($value)->toString();
+            });
+
+        return $fields;
+    }
+
+    public function extraFields(Request $request)
+    {
+        return [];
+    }
+
     public function actions(Request $request)
     {
         return array_merge($this->extraActions($request), [
-//            (new DownloadExcel())->withHeadings()->allFields(),
+            (new DownloadExcel())->withHeadings()->allFields(),
         ]);
     }
 
