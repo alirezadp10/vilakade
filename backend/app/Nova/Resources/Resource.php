@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource as NovaResource;
-use Maatwebsite\LaravelNovaExcel\Actions\DownloadExcel;
 
 abstract class Resource extends NovaResource
 {
@@ -76,7 +75,7 @@ abstract class Resource extends NovaResource
     public function actions(Request $request)
     {
         return array_merge($this->extraActions($request), [
-            (new DownloadExcel())->withHeadings()->allFields(),
+//            (new DownloadExcel())->withHeadings()->allFields(),
         ]);
     }
 
