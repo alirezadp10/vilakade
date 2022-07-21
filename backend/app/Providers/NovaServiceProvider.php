@@ -20,6 +20,8 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     {
         parent::boot();
 
+        Nova::theme('/vendor/css/nova.css');
+
         Nova::sortResourcesBy(function ($resource) {
             return array_search($resource, $this->priority());
         });
@@ -61,14 +63,15 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             \App\Nova\Resources\User::class,
             \App\Nova\Resources\Villa::class,
-            \App\Nova\Resources\Reservation::class,
+//            \App\Nova\Resources\Reservation::class,
             \App\Nova\Resources\Category::class,
-            \App\Nova\Resources\Payment::class,
-            \App\Nova\Resources\Transaction::class,
+            \App\Nova\Resources\Option::class,
+//            \App\Nova\Resources\Payment::class,
+//            \App\Nova\Resources\Transaction::class,
             \App\Nova\Resources\Address::class,
             \App\Nova\Resources\City::class,
             \App\Nova\Resources\Province::class,
-            \App\Nova\Resources\EmergencyPhone  ::class,
+            \App\Nova\Resources\EmergencyPhone::class,
             \App\Nova\Resources\Admin::class,
         ];
     }

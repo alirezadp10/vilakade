@@ -11,7 +11,6 @@ use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasMany;
-use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Text;
@@ -25,10 +24,9 @@ class User extends Resource
         'id', 'name', 'mobile',
     ];
 
-    public function fields(Request $request)
+    public function extraFields(Request $request)
     {
         return [
-            ID::make()->sortable(),
             Images::make('avatar', 'avatar')
                 ->conversionOnDetailView('thumb')
                 ->conversionOnIndexView('thumb')
@@ -36,33 +34,41 @@ class User extends Resource
                 ->customPropertiesFields([
                     Text::make('alt'),
                 ])
-                ->setFileName(function($originalFilename, $extension, $model){
-                    return md5($originalFilename) . '.' . $extension;
+                ->setFileName(function ($originalFilename, $extension, $model) {
+                    return md5($originalFilename).'.'.$extension;
                 })
                 ->fullSize()
                 ->rules('nullable', 'max:1'),
+
             Text::make('name')->sortable()->rules(Model::$rules['name']),
+
             Text::make('mobile')->sortable()->rules(Model::$rules['mobile']),
+
             Textarea::make('bio')->hideFromIndex()->rules(Model::$rules['bio']),
+
             Text::make('otp')->hideFromIndex()->rules(Model::$rules['otp']),
+
             Date::make('birthday')->hideFromIndex()->rules(Model::$rules['birthday'])->displayUsing(function ($value) {
                 return jdate($value)->format('Y-m-d');
             }),
-            DateTime::make('otp issued at')->rules(Model::$rules['otp_issued_at'])->hideFromIndex()->displayUsing(function ($value) {
-                return jdate($value)->toString();
-            }),
-            DateTime::make('updated at')->hideWhenCreating()->hideWhenUpdating()->default(now())->sortable()->displayUsing(function ($value) {
-                return jdate($value)->toString();
-            }),
-            DateTime::make('created at')->hideWhenCreating()->hideWhenUpdating()->default(now())->hideFromIndex()->displayUsing(function ($value) {
-                return jdate($value)->toString();
-            }),
+
+            DateTime::make('otp issued at')
+                ->rules(Model::$rules['otp_issued_at'])
+                ->hideFromIndex()
+                ->displayUsing(function ($value) {
+                    return jdate($value)->toString();
+                }),
 
             MorphOne::make('address', 'address', Address::class),
+
             MorphMany::make('villas', 'villas', Villa::class),
+
             HasMany::make('reserves', 'reserves', Reservation::class),
+
             HasMany::make('payments', 'payments', Payment::class),
+
             HasMany::make('emergency phones', 'emergencyPhones', EmergencyPhone::class),
+
             BelongsToMany::make('popular cities', 'popularCities', City::class),
         ];
     }
