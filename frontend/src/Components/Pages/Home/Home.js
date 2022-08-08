@@ -167,7 +167,7 @@ function Home() {
     const fetchVillas = async () => {
       try {
   //       // const response = await api.get("/villas");
-        const response = axios.get('http://localhost:8000/api/villas')
+        const response = axios.get(process.env.REACT_APP_API_URI + '/api/villas')
         console.log(response)
         if( response && response.data )
         console.log(response.data);
