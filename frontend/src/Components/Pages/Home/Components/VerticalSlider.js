@@ -38,7 +38,7 @@ function VerticalSlider(props) {
     const [realSwiperIndex, setRealSwiperIndex] = useState(0);
 
     const verticalSliderChange = (event) => {
-        console.log("slider");
+        // console.log("slider");
         setRealSwiperIndex(event.realIndex);
     };
 

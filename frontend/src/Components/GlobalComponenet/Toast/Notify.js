@@ -3,7 +3,7 @@ import { phone } from "../../variables";
 
 toast.configure();
 export const Notify = (message) => {
-    console.log(message);
+    // console.log(message);
     toast.warning(message, {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 5000,

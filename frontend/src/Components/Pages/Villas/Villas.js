@@ -151,6 +151,9 @@ function Villas(props) {
             ...prevState,
             [typeName]: typechecked,
         }));
+
+        console.log( 'typeVillafilter' )
+        console.log( typeVillafilter )
     };
 
     useEffect(() => {
@@ -233,7 +236,7 @@ function Villas(props) {
         },
         {
             id: 127,
-            name: "اجاره ویلا شماره سه",
+            name: "اجاره ویلا شماره 44 nkdl nd d 44",
             country: "iran",
             State: "مازندران",
             city: "رامسر",
@@ -246,7 +249,7 @@ function Villas(props) {
             mainImg: "kdjklsmc",
             imgs: [birthday, marry, luxery, relax, flat],
             reserveStatus: 1,
-            discount: 10,
+            discount: 0,
             seen: 5,
             rate: 2,
             properties: {
@@ -377,6 +380,8 @@ function Villas(props) {
             type: ["Villa"],
         },
     ]);
+
+    
 
     return (
         <MainSection className="container mx-auto">
@@ -553,18 +558,18 @@ function Villas(props) {
                     <div className="col-span-3 ">
                         <div className="my-4 flex justify-between items-center">
                             <div className="flex justify-start gap-4 text-sm">
-                                <span className="font-semibold flex items-center gap-2">
+                                <span className="font-semibold flex items-center gap-2 text-gray-600">
                                     <FaSortAmountDownAlt size={20} />
                                     <span> مرتب سازی : </span>
                                 </span>
-                                <div className="md:flex gap-4 hidden ">
+                                <div className="md:flex gap-4 hidden text-gray-400 font-normal">
                                     <span
                                         onClick={handleClickSort}
                                         className={`${
                                             ActiveSortingItem === "related"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer `}
+                                        } cursor-pointer  `}
                                         name="related"
                                     >
                                         مرتبط‌ ترین
@@ -575,7 +580,7 @@ function Villas(props) {
                                             ActiveSortingItem == "visited"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer`}
+                                        } cursor-pointer `}
                                         name="visited"
                                     >
                                         پربازدید ترین
@@ -586,7 +591,7 @@ function Villas(props) {
                                             ActiveSortingItem == "popular"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer`}
+                                        } cursor-pointer `}
                                         name="popular"
                                     >
                                         محبوبترین
@@ -597,7 +602,7 @@ function Villas(props) {
                                             ActiveSortingItem === "cheapest"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer`}
+                                        } cursor-pointer `}
                                         name="cheapest"
                                     >
                                         ارزان‌ترین
@@ -608,7 +613,7 @@ function Villas(props) {
                                             ActiveSortingItem === "expensive"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer`}
+                                        } cursor-pointer `}
                                         name="expensive"
                                     >
                                         گران ترین
@@ -619,7 +624,7 @@ function Villas(props) {
                                             ActiveSortingItem === "suggestions"
                                                 ? "text-red-400 font-semibold"
                                                 : ""
-                                        } cursor-pointer`}
+                                        } cursor-pointer `}
                                         name="suggestions"
                                     >
                                         پیشنهادات خریداران
@@ -629,7 +634,7 @@ function Villas(props) {
                         </div>
 
                         <div>
-                            <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
+                            <div className="grid md:grid-cols-3 grid-cols-1 gap-6">
                                 {VillasList.map((item, index) => (
                                     <div className="col">
                                         <VillaCardSmall villa={item} />

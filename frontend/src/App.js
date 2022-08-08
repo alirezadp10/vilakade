@@ -46,13 +46,13 @@ function App() {
                     <AnimatePresence exitBeforeEnter>
                         <Routes>
                             <Route path="/" exact element={<Home />} />
-                            <Route path="/verify-code" element={<Verify />} />
-                            <Route path="/register" element={<Register />} />
-                            <Route path="/login" element={<Login />} />
+                            {/* <Route path="/verify-code" element={<Verify />} /> */}
+                            {/* <Route path="/register" element={<Register />} /> */}
+                            {/* <Route path="/login" element={<Login />} /> */}
                             <Route path="/about" element={<About />} />
                             {/* {localStorage.getItem("USER_TOKEN") ? (
                                 <> */}
-                            <Route
+                            {/* <Route
                                 path="/profile/account"
                                 element={<Profile />}
                             />
@@ -75,12 +75,12 @@ function App() {
                             <Route
                                 path="/profile/user-invite"
                                 element={<Profile />}
-                            />
+                            /> */}
                             <Route path="/support" element={<SupportPage />} />
                             <Route path="/stays/:city" element={<Villas />} />
                             <Route path="/stays/" element={<Villas />} />
                             <Route path="/stay/:slug" element={<MyVilla />} />
-                            <Route path="/invoice" element={<Invoices />} />
+                            {/* <Route path="/invoice" element={<Invoices />} /> */}
                         </Routes>
                     </AnimatePresence>
 
