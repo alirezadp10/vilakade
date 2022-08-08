@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\Models\Reservation;
 use App\Models\Villa;
 use Database\Seeders\CitySeeder;
 use Database\Seeders\ProvinceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
 use Morilog\Jalali\Jalalian;
 use Tests\TestCase;
 
@@ -205,5 +203,17 @@ class VillaTest extends TestCase
                 "created_at",
             ],
         ]);
+    }
+    
+    /**
+     * @test
+     */
+    public function users_can_filter_promoted_villas()
+    {
+        Villa::factory(7)->create();
+
+        Villa::factory(3)->hasPromoted()->create();
+
+        $this->getJson('/api/villas?promoted')->assertJsonCount(3, 'data');
     }
 }

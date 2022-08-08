@@ -63,6 +63,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         return [
             \App\Nova\Resources\User::class,
             \App\Nova\Resources\Villa::class,
+            \App\Nova\Resources\Promoted::class,
 //            \App\Nova\Resources\Reservation::class,
             \App\Nova\Resources\Category::class,
             \App\Nova\Resources\Option::class,

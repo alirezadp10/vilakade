@@ -17,6 +17,7 @@ class VillaFilter extends Filters
         'category',
         'empty',
         'instant-delivery',
+        'promoted',
     ];
 
     protected function rooms($rooms)
@@ -80,5 +81,10 @@ class VillaFilter extends Filters
     protected function instantDelivery()
     {
         return $this->builder->where('instant_delivery', true);
+    }
+
+    protected function promoted()
+    {
+        return $this->builder->whereHas('promoted');
     }
 }

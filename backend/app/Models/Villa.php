@@ -74,4 +74,9 @@ class Villa extends Model implements HasMedia
     {
         return $filters->apply($query);
     }
+
+    public function promoted()
+    {
+        return $this->hasOne(Promoted::class);
+    }
 }
