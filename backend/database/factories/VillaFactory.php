@@ -22,7 +22,6 @@ class VillaFactory extends Factory
             'capacity'   => $this->faker->numberBetween(0, 1000),
             'area'       => $this->faker->numberBetween(10, 100000),
             'foundation' => $this->faker->numberBetween(10, 100000),
-            'type'       => $this->faker->randomElement(array_values(Villa::TYPES)),
             'rate'       => $this->faker->numberBetween(0, 5),
             'user_id'    => User::factory(),
             'price'      => $this->faker->numberBetween(1000, 10000),

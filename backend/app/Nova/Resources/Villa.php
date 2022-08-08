@@ -11,17 +11,14 @@ use App\Nova\Filters\Villa\VillaPriceFilter;
 use App\Nova\Filters\Villa\VillaRateFilter;
 use App\Nova\Filters\Villa\VillaRoomFilter;
 use App\Nova\Filters\Villa\VillaTitleFilter;
-use App\Nova\Filters\Villa\VillaTypeFilter;
 use App\Nova\Metrics\VillaCount;
 use App\Nova\Metrics\VillaPriceAvg;
-use App\Nova\Metrics\VillasPerType;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Images;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\MorphOne;
 use Laravel\Nova\Fields\Number;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Silvanite\NovaFieldCheckboxes\Checkboxes;
 use Sloveniangooner\SearchableSelect\SearchableSelect;
@@ -33,7 +30,6 @@ class Villa extends Resource
     public static $search = [
         'id',
         'title',
-        'type',
     ];
 
     private $options = [
@@ -68,12 +64,6 @@ class Villa extends Resource
                 ->sortable()
                 ->rules(Model::$rules['foundation'])
                 ->hideFromIndex(),
-
-            Select::make('نوع', 'type')
-                ->sortable()
-                ->rules(Model::$rules['type'])
-                ->options(array_map(fn($item) => __('app.'.strtolower($item)), Model::TYPES))
-                ->displayUsing(fn($item) => __('app.'.strtolower($item))),
 
             Number::make('امتیاز', 'rate')->sortable()->rules(Model::$rules['rate']),
 
@@ -114,7 +104,6 @@ class Villa extends Resource
     {
         return [
             new VillaTitleFilter(),
-            new VillaTypeFilter(),
             new VillaOwnerFilter(),
             new VillaCityFilter(),
             new VillaRoomFilter(),
@@ -128,7 +117,6 @@ class Villa extends Resource
     {
         return [
             new VillaCount(),
-            new VillasPerType(),
             new VillaPriceAvg(),
         ];
     }

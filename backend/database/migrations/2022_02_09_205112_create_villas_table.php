@@ -20,7 +20,6 @@ class CreateVillasTable extends Migration
             $table->integer('capacity')->index();
             $table->integer('area');
             $table->integer('foundation');
-            $table->string('type');
             $table->integer('rate')->nullable();
             $table->boolean('instant_delivery')->default(false);
             $table->integer('price');

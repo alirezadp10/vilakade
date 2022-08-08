@@ -15,6 +15,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
         Category::insert([
+            ['title' => 'آپارتمان', 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'ویلایی', 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'کلبه', 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'سوئیت', 'created_at' => now(), 'updated_at' => now()],
+            ['title' => 'باغ', 'created_at' => now(), 'updated_at' => now()],
             ['title' => 'مناسب برای جشن و میهمانی', 'created_at' => now(), 'updated_at' => now()],
             ['title' => 'مناسب برای ماه‌عسل', 'created_at' => now(), 'updated_at' => now()],
             ['title' => 'مناسب برای آرامش', 'created_at' => now(), 'updated_at' => now()],

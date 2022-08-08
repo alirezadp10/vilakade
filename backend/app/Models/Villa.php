@@ -22,7 +22,6 @@ class Villa extends Model implements HasMedia
         'capacity',
         'area',
         'foundation',
-        'type',
         'rate',
         'instant_delivery',
         'price',
@@ -35,19 +34,10 @@ class Villa extends Model implements HasMedia
         'capacity'         => ['required', 'integer', 'gte:0', 'lte:1000'],
         'area'             => ['required', 'integer', 'gte:10'],
         'foundation'       => ['required', 'integer', 'gte:10'],
-        'type'             => ['required', 'in:apartment,bungalow,hut,studio_flat,garden'],
         'rate'             => ['nullable', 'integer', 'gte:0', 'lte:5'],
         'instant_delivery' => ['nullable', 'boolean'],
         'price'            => ['required', 'integer', 'gte:1000'],
         'discount'         => ['required', 'integer', 'gte:0', 'lte:100'],
-    ];
-
-    public const TYPES = [
-        'apartment'   => 'APARTMENT',
-        'bungalow'    => 'BUNGALOW',
-        'hut'         => 'HUT',
-        'studio_flat' => 'STUDIO_FLAT',
-        'garden'      => 'GARDEN',
     ];
 
     public function registerMediaConversions(Media $media = null): void
@@ -58,11 +48,6 @@ class Villa extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('images');
-    }
-
-    public function getTypeAttribute($value)
-    {
-        return strtolower($value);
     }
 
     public function getImageAttribute()
