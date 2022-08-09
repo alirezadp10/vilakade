@@ -27,6 +27,8 @@ class Villa extends Resource
 {
     public static $model = Model::class;
 
+    public static $title = 'title';
+
     public static $search = [
         'id',
         'title',
@@ -133,6 +135,7 @@ class Villa extends Resource
             $optionFields[] = Checkboxes::make($type, $this->options[$type])
                 ->options(array_combine($titles, $titles))
                 ->columns(3)
+                ->hideWhenCreating()
                 ->hideFromIndex();
         }
 
@@ -148,6 +151,7 @@ class Villa extends Resource
         $categoryField[] = Checkboxes::make('دسته بندی', 'category')
             ->options(array_combine($categories, $categories))
             ->columns(3)
+            ->hideWhenCreating()
             ->hideFromIndex();
 
         return $categoryField;

@@ -20,6 +20,8 @@ class User extends Resource
 {
     public static $model = Model::class;
 
+    public static $title = 'mobile';
+
     public static $search = [
         'id', 'name', 'mobile',
     ];
