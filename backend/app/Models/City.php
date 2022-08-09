@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\CityFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,5 +29,10 @@ class City extends Model
     public function enthusiasts()
     {
         return $this->belongsToMany(User::class, 'popular_cities');
+    }
+
+    public function scopeFilter($query, CityFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }
