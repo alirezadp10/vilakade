@@ -3,9 +3,10 @@
 namespace App\Nova\Resources;
 
 use App\Models\Promoted as Model;
+use App\Nova\User;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\Text;
+use Sloveniangooner\SearchableSelect\SearchableSelect;
 
 class Promoted extends Resource
 {
@@ -18,7 +19,8 @@ class Promoted extends Resource
     public function extraFields(Request $request)
     {
         return [
-            BelongsTo::make('villa', 'villa', Villa::class),
+            BelongsTo::make('villa', 'villa', Villa::class)->hideWhenCreating()->hideWhenUpdating(),
+            SearchableSelect::make('villa', 'villa_id')->resource(Villa::class)->hideFromIndex()->hideFromDetail(),
         ];
     }
 }
