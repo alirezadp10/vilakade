@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PaymentController;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::post('/otp', [AuthController::class, 'otp'])->middleware('throttle:1,1,otp');
 
 Route::post('/verify', [AuthController::class, 'verify']);
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/cities', [CityController::class, 'index'])->name('cities.index');
 
